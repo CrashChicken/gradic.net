@@ -56,7 +56,7 @@ export default function Hero() {
           Hey!
           <br />
           I'm Jan,
-          <br />a full stack{" "}
+          <br />a full-stack{" "}
           <span style={{ textShadow: "5px 5px #558ABB" }}>web developer.</span>
         </h1>
         <p className="text-center text-gray-400 text-lg">

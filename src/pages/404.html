@@ -24,26 +24,34 @@
       text-align: center;
     }
 
-    h1 {
-      font-size: 3rem;
+    .title {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
     }
 
-    a {
+    .button {
       color: white;
       text-decoration: none;
       padding: 1rem 2rem 1rem 2rem;
       border: 2px solid white;
       font-size: 1.125rem;
+      white-space: nowrap;
     }
 
-    a:hover {
+    .button:hover {
       background-color: white;
       color: #111827;
       transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
     }
+
+    .container {
+      padding: 1rem;
+    }
   </style>
   <body>
-    <h1>404 | NOT FOUND</h1>
-    <a href="/">RETURN BACK</a>
+    <main class="container">
+      <h1 class="title">404 | NOT FOUND</h1>
+      <a href="/" class="button">RETURN BACK</a>
+    </main>
   </body>
 </html>
