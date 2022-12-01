@@ -1,0 +1,30 @@
+---
+import Hero from "../components/hero";
+import Layout from "../layouts/Layout.astro";
+import type { Props as SEOProps } from "../layouts/Layout.astro";
+
+const seo: SEOProps = {
+  seo: {
+    title: "Jan Gradič | full-stack developer",
+    description:
+      "Jan Gradič is an experienced full-stack developer with extensive knowledge and experience in React, Nextjs, Nestjs, Astro, AWS, Docker, and Linux administration. He specializes in backend, and his passion for development extends to all aspects of the web, from the server side to the client side. With an eye for detail and an eagerness to learn new technologies, Jan is the perfect choice for any project that requires a reliable, experienced and talented full-stack developer.",
+    openGraph: {
+      basic: {
+        title: "Hey! I'm Jan, a full stack web developer.",
+        image: "/og.png",
+        type: "website",
+      },
+      image: {
+        width: 1200,
+        height: 630,
+        type: "image/png",
+        alt: "Hey! I'm Jan, a full stack web developer.",
+      },
+    },
+  },
+};
+---
+
+<Layout {...seo}>
+  <Hero client:load />
+</Layout>
