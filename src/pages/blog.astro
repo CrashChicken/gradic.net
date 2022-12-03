@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+import type { Props as SEOProps } from "../layouts/Layout.astro";
+
+const posts = (await Astro.glob("./blog/*.{md,mdx}")).sort(
+  (a, b) =>
+    new Date(b.frontmatter.pubDate).valueOf() -
+    new Date(a.frontmatter.pubDate).valueOf()
+);
+
+const seo: SEOProps = {
+  seo: {
+    title: `Jan Gradič blog`,
+    description: "Jan Gradič blog",
+    openGraph: {
+      basic: {
+        title: "Jan Gradič blog",
+        image: "/og.png",
+        type: "website",
+      },
+      image: {
+        width: 1200,
+        height: 630,
+        type: "image/png",
+        alt: "Hey! I'm Jan, a full stack web developer.",
+      },
+    },
+  },
+};
+---
+
+<Layout {...seo}>
+  <main>
+    {
+      posts.map((post) => (
+        <li>
+          <time datetime={post.frontmatter.pubDate}>
+            {new Date(post.frontmatter.pubDate).toLocaleDateString("en-us", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
+          </time>
+          <a href={post.url}>{post.frontmatter.title}</a>
+        </li>
+      ))
+    }
+  </main>
+</Layout>

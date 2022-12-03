@@ -28,7 +28,7 @@ export default function Hero() {
   };
 
   return (
-    <main className="bg-gray-900 min-h-screen flex flex-col justify-center items-center text-white px-8 py-6">
+    <main className="min-h-screen flex flex-col justify-center items-center px-8 py-6">
       <svg
         className="sm:w-64 w-60"
         viewBox="0 0 6 7"
@@ -59,24 +59,18 @@ export default function Hero() {
           <br />a full-stack{" "}
           <span style={{ textShadow: "5px 5px #558ABB" }}>web developer.</span>
         </h1>
-        <p className="text-center text-gray-400 text-lg">
+        <p className="text-center text-gray-500 dark:text-gray-400 text-lg">
           React / Next.js / NestJS / Linux / Docker / AWS
         </p>
         {email ? (
-          <div className="flex text-lg text-center p-4 bg-gray-800 w-full justify-between items-center">
+          <div className="flex text-lg text-center p-4 bg-slate-200 dark:bg-gray-800 w-full justify-between items-center">
             <code>{email}</code>
-            <button
-              onClick={handleCopy}
-              className="block text-white px-2 py-1 rounded border-2 border-white hover:text-gray-900 hover:bg-white transition-colors duration-100 ease-in-out"
-            >
+            <button onClick={handleCopy} className="btn px-2 py-1 rounded">
               Copy
             </button>
           </div>
         ) : (
-          <button
-            onClick={handleContact}
-            className="text-center text-lg border-2 border-white px-8 py-4 hover:bg-white hover:text-gray-900 transition-colors duration-300 ease-in-out"
-          >
+          <button onClick={handleContact} className="btn px-8 py-4 text-lg">
             Contact me
           </button>
         )}

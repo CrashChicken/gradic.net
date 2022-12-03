@@ -1,0 +1,78 @@
+---
+import Layout from "../layouts/Layout.astro";
+import type { Props as SEOProps } from "../layouts/Layout.astro";
+
+export interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    pubDate?: string;
+    updatedDate?: string;
+    heroImage?: string;
+  };
+}
+
+const {
+  frontmatter: { title, description, pubDate, updatedDate, heroImage },
+} = Astro.props;
+
+const seo: SEOProps = {
+  seo: {
+    title: `Jan Gradič blog | ${title}`,
+    description,
+    openGraph: {
+      basic: {
+        title,
+        image: heroImage || "/og.png",
+        type: "website",
+      },
+      /*image: {
+        width: 1200,
+        height: 630,
+        type: "image/png",
+        alt: "Hey! I'm Jan, a full stack web developer.",
+      },*/
+    },
+  },
+};
+---
+
+<Layout {...seo}>
+  <main class="p-8">
+    <div class="flex items-center justify-between">
+      <a href="/" class="text-lg font-bold hover:scale-110 transition-transform"
+        >Home</a
+      >
+      <button id="theme-toggle" class="btn px-4 py-2">Theme switch</button>
+    </div>
+    <article class="prose lg:prose-lg xl:prose-xl dark:prose-invert m-auto">
+      {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
+      <h1 class="title">{title}</h1>
+      {pubDate && <time>{pubDate}</time>}
+      {
+        updatedDate && (
+          <div>
+            Last updated on <time>{updatedDate}</time>
+          </div>
+        )
+      }
+      <hr />
+      <slot />
+    </article>
+  </main>
+</Layout>
+
+<!--<script>
+  const themeButton = document.getElementById("themeButton");
+  const theme = localStorage.getItem("theme");
+  if (theme === "dark") {
+    document..classList.add("dark");
+  }
+  themeButton?.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    localStorage.setItem(
+      "theme",
+      document.body.classList.contains("dark") ? "dark" : "light"
+    );
+  });
+</script>-->

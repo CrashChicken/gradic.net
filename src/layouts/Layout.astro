@@ -2,6 +2,8 @@
 import { SEO } from "astro-seo";
 import type { Props as SEOProps } from "astro-seo";
 
+import "../assets/base.css";
+
 export interface Props {
   seo: SEOProps;
 }
@@ -18,7 +20,49 @@ const { seo } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <SEO {...seo} />
   </head>
-  <body>
+  <body
+    class="transition-colors bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white"
+  >
     <slot />
+    <script>
+      function setTheme() {
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (
+          localStorage.theme === "dark" ||
+          (!("theme" in localStorage) &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      }
+
+      setTheme();
+
+      function changeTheme() {
+        if (localStorage.theme === "dark") {
+          localStorage.theme = "light";
+        } else {
+          localStorage.theme = "dark";
+        }
+        setTheme();
+      }
+
+      document
+        .getElementById("theme-toggle")
+        ?.addEventListener("click", changeTheme);
+
+      /*
+      // Whenever the user explicitly chooses light mode
+      localStorage.theme = "light";
+
+      // Whenever the user explicitly chooses dark mode
+      localStorage.theme = "dark";
+
+      // Whenever the user explicitly chooses to respect the OS preference
+      localStorage.removeItem("theme");
+      */
+    </script>
   </body>
 </html>
