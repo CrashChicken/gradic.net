@@ -28,7 +28,7 @@ export default function Hero() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col justify-center items-center px-8 py-6">
+    <main className="flex flex-col justify-center items-center px-8 py-6">
       <svg
         className="sm:w-64 w-60"
         viewBox="0 0 6 7"
@@ -57,7 +57,9 @@ export default function Hero() {
           <br />
           I'm Jan,
           <br />a full-stack{" "}
-          <span style={{ textShadow: "5px 5px #558ABB" }}>web developer.</span>
+          <span className="[text-shadow:_5px_5px_#70c4cf] dark:[text-shadow:_5px_5px_#558ABB]">
+            web developer.
+          </span>
         </h1>
         <p className="text-center text-gray-500 dark:text-gray-400 text-lg">
           React / Next.js / NestJS / Linux / Docker / AWS

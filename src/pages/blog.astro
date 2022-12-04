@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import type { Props as SEOProps } from "../layouts/Layout.astro";
+import Navigation from "../components/Navigation.astro";
 
 const posts = (await Astro.glob("./blog/*.{md,mdx}")).sort(
   (a, b) =>
@@ -30,7 +31,8 @@ const seo: SEOProps = {
 ---
 
 <Layout {...seo}>
-  <main>
+  <Navigation />
+  <main class="p-8">
     {
       posts.map((post) => (
         <li>

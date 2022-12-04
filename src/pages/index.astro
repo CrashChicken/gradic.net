@@ -2,6 +2,8 @@
 import Hero from "../components/hero";
 import Layout from "../layouts/Layout.astro";
 import type { Props as SEOProps } from "../layouts/Layout.astro";
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
 
 const seo: SEOProps = {
   seo: {
@@ -26,5 +28,9 @@ const seo: SEOProps = {
 ---
 
 <Layout {...seo}>
-  <Hero client:load />
+  <div class="min-h-screen flex flex-col justify-between">
+    <Navigation />
+    <Hero client:load />
+    <Footer />
+  </div>
 </Layout>

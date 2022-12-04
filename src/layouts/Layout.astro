@@ -20,49 +20,53 @@ const { seo } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <SEO {...seo} />
   </head>
-  <body
-    class="transition-colors bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white"
-  >
+  <body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white">
     <slot />
-    <script>
+    <script is:inline>
+      const themeButton = document.getElementById("theme-switch"); //as HTMLButtonElement | null;
+
+      function isUserPreferedThemeDark() {
+        let darkTheme = null;
+
+        const userChoice = localStorage.getItem("theme");
+        if (userChoice === "dark") darkTheme = true;
+        if (userChoice === "light") darkTheme = false;
+
+        if (darkTheme === null)
+          darkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+        return darkTheme;
+      }
+
       function setTheme() {
-        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-        if (
-          localStorage.theme === "dark" ||
-          (!("theme" in localStorage) &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches)
-        ) {
+        const darkTheme = isUserPreferedThemeDark();
+
+        if (darkTheme) {
           document.documentElement.classList.add("dark");
+          if (themeButton) themeButton.innerText = "Light ☀️";
         } else {
           document.documentElement.classList.remove("dark");
+          if (themeButton) themeButton.innerText = "Dark 🌙";
         }
+      }
+
+      function changeTheme(theme) {
+        //: "dark" | "light" | "system") {
+        if (theme === "system") delete localStorage.theme;
+        else localStorage.theme = theme;
+
+        document.body.classList.add("transition-colors");
+        setTheme();
+        document.body.classList.remove("transition-colors");
       }
 
       setTheme();
 
-      function changeTheme() {
-        if (localStorage.theme === "dark") {
-          localStorage.theme = "light";
-        } else {
-          localStorage.theme = "dark";
-        }
-        setTheme();
-      }
-
-      document
-        .getElementById("theme-toggle")
-        ?.addEventListener("click", changeTheme);
-
-      /*
-      // Whenever the user explicitly chooses light mode
-      localStorage.theme = "light";
-
-      // Whenever the user explicitly chooses dark mode
-      localStorage.theme = "dark";
-
-      // Whenever the user explicitly chooses to respect the OS preference
-      localStorage.removeItem("theme");
-      */
+      themeButton?.addEventListener("click", () => {
+        const darkTheme = isUserPreferedThemeDark();
+        if (darkTheme) changeTheme("light");
+        else changeTheme("dark");
+      });
     </script>
   </body>
 </html>

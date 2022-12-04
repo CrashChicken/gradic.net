@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import type { Props as SEOProps } from "../layouts/Layout.astro";
+import Navigation from "../components/Navigation.astro";
 
 export interface Props {
   frontmatter: {
@@ -38,14 +39,11 @@ const seo: SEOProps = {
 ---
 
 <Layout {...seo}>
-  <main class="p-8">
-    <div class="flex items-center justify-between">
-      <a href="/" class="text-lg font-bold hover:scale-110 transition-transform"
-        >Home</a
-      >
-      <button id="theme-toggle" class="btn px-4 py-2">Theme switch</button>
-    </div>
-    <article class="prose lg:prose-lg xl:prose-xl dark:prose-invert m-auto">
+  <main>
+    <Navigation />
+    <article
+      class="prose lg:prose-lg xl:prose-xl dark:prose-invert m-auto px-8 pb-8"
+    >
       {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
       <h1 class="title">{title}</h1>
       {pubDate && <time>{pubDate}</time>}
