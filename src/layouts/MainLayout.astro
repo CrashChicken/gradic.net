@@ -3,20 +3,19 @@ import Layout from "../layouts/Layout.astro";
 import Navigation from "../components/Navigation.astro";
 import type { Props as SEOProps } from "astro-seo";
 import Footer from "../components/Footer.astro";
-import RSSButton from "../components/RSSButton.astro";
 
 export interface Props {
   seo: SEOProps;
+  className?: string;
 }
 
-const { seo } = Astro.props;
+const { seo, className } = Astro.props;
 ---
 
 <Layout seo={seo}>
-  <main class="p-4 sm:p-8">
+  <main class={`p-4 sm:p-8 ${className}`}>
     <Navigation />
     <slot />
     <Footer />
-    <RSSButton />
   </main>
 </Layout>

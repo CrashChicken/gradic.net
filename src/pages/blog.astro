@@ -1,4 +1,5 @@
 ---
+import RSSButton from "../components/RSSButton.astro";
 import type { Props as SEOProps } from "../layouts/Layout.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 
@@ -31,6 +32,10 @@ const seo: SEOProps = {
 
 <MainLayout {...seo}>
   <main class="prose lg:prose-lg xl:prose-xl dark:prose-invert m-auto">
+    <div class="flex justify-between">
+      <h1>Blog</h1>
+      <RSSButton />
+    </div>
     {
       posts.map((post) => (
         <div class="mb-16 lg:mb-20">

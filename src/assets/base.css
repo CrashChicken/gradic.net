@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+}
+
 @layer components {
   .btn {
     @apply text-center border-2 border-gray-900 dark:border-white hover:text-white dark:hover:text-gray-900 hover:bg-gray-900 dark:hover:bg-white transition-colors ease-in-out whitespace-nowrap;
