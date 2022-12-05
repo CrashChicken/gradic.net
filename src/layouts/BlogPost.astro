@@ -1,7 +1,6 @@
 ---
-import Layout from "../layouts/Layout.astro";
 import type { Props as SEOProps } from "../layouts/Layout.astro";
-import Navigation from "../components/Navigation.astro";
+import MainLayout from "./MainLayout.astro";
 
 export interface Props {
   frontmatter: {
@@ -38,25 +37,35 @@ const seo: SEOProps = {
 };
 ---
 
-<Layout {...seo}>
-  <Navigation />
-  <main class="p-8">
-    <article class="prose lg:prose-lg xl:prose-xl dark:prose-invert m-auto">
-      {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
-      <h1 class="title">{title}</h1>
-      {pubDate && <time>{pubDate}</time>}
-      {
-        updatedDate && (
-          <div>
-            Last updated on <time>{updatedDate}</time>
-          </div>
-        )
-      }
-      <hr />
-      <slot />
-    </article>
-  </main>
-</Layout>
+<MainLayout {...seo}>
+  <article class="prose lg:prose-lg xl:prose-xl dark:prose-invert m-auto">
+    {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
+    <h1 class="title">{title}</h1>
+    {
+      pubDate && (
+        <div>
+          Posted on{" "}
+          <time datetime={pubDate}>
+            {new Date(pubDate).toLocaleDateString("en-us", {
+              day: "2-digit",
+              month: "long",
+              year: "numeric",
+            })}
+          </time>
+        </div>
+      )
+    }
+    {
+      updatedDate && (
+        <div>
+          Last updated on <time>{updatedDate}</time>
+        </div>
+      )
+    }
+    <hr />
+    <slot />
+  </article>
+</MainLayout>
 
 <!--<script>
   const themeButton = document.getElementById("themeButton");
